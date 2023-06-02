@@ -1,5 +1,7 @@
 # shopshopNew
 A shop using vue SpringBoot and MyBatis
+
+```
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -7,18 +9,20 @@ A shop using vue SpringBoot and MyBatis
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.0)
- 
- ## 开发相关：
+```
 
-- B2C 线上零售网站
+## B2C 线上零售网站
 
 ### 技术栈：
 
-- 操作系统：Mac
-- Java 17
-- VUE + Axios
-- OpenAPI 3.0
-- IDE：Eclipse (Spring Tool Suits 4)
-- Spring Boot 5 (Maven)
-- MySQL (MyBatis)
-- AWS
+- ![macOS](https://a11ybadges.com/badge?logo=macos) MacOS Ventura
+- ![Java](https://a11ybadges.com/badge?logo=java) Java 17 
+- ![Vue.js](https://a11ybadges.com/badge?logo=vuedotjs) VUE 3 + Axios	
+- ![Swagger](https://a11ybadges.com/badge?logo=swagger)OpenAPI 3.0 
+- #### IDE:
+    - ![Eclipse IDE](https://a11ybadges.com/badge?logo=eclipseide) Eclipse (Spring Tool Suits 4)	
+    - ![IntelliJ IDEA](https://a11ybadges.com/badge?logo=intellijidea) IntelliJ IDEA
+    - ![Visual Studio Code](https://a11ybadges.com/badge?logo=visualstudiocode) Visual Studio Code 
+- ![Spring Boot](https://a11ybadges.com/badge?logo=springboot) ![Apache Maven](https://a11ybadges.com/badge?logo=apachemaven) Spring Boot 3 (Maven)
+- ![MySQL](https://a11ybadges.com/badge?logo=mysql) MySQL (MyBatis3.x)
+- ![Amazon AWS](https://a11ybadges.com/badge?logo=amazonaws) AWS
