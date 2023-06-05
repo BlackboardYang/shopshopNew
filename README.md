@@ -23,6 +23,6 @@ A shop using vue SpringBoot and MyBatis
     - ![Eclipse IDE](https://a11ybadges.com/badge?logo=eclipseide) Eclipse (Spring Tool Suits 4)	
     - ![IntelliJ IDEA](https://a11ybadges.com/badge?logo=intellijidea) IntelliJ IDEA
     - ![Visual Studio Code](https://a11ybadges.com/badge?logo=visualstudiocode) Visual Studio Code 
-- ![Spring Boot](https://a11ybadges.com/badge?logo=springboot) ![Apache Maven](https://a11ybadges.com/badge?logo=apachemaven) Spring Boot 3 (Maven)
+- ![Spring Boot](https://a11ybadges.com/badge?logo=springboot) ![Apache Maven](https://a11ybadges.com/badge?logo=apachemaven) Spring Boot 3 (Maven)(Spring Security 6)
 - ![MySQL](https://a11ybadges.com/badge?logo=mysql) MySQL (MyBatis3.x)
 - ![Amazon AWS](https://a11ybadges.com/badge?logo=amazonaws) AWS
