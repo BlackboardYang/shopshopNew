@@ -17,7 +17,6 @@ public class ProductServiceImpl implements ProductMapper{
 
 	@Override
 	public List<Product> selectAll() {
-		// TODO Auto-generated method stub
 		return productMapper.selectAll();
 	}
 

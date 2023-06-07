@@ -2,14 +2,9 @@ package com.panacea.shopshop.controller;
 
 import java.util.List;
 
+import com.panacea.shopshop.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.panacea.shopshop.mapper.ProductMapper;
 import com.panacea.shopshop.model.Product;
@@ -34,9 +29,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/selectAll")
-	public List<Product> selectAll() {
-		return productMapper.selectAll();
-		
+	public Result<List<Product>> selectAll() {
+		List<Product> productList = productMapper.selectAll();
+//		Result<List<Product>> productResult = productList.success();
+		return Result.success(productList,"ok");
 	}
 	
 	@GetMapping("/selectById/{id}")
