@@ -39,8 +39,8 @@
           </el-col>
           <el-col :span="9" style="margin-top: -10px">
             <el-row>
-              <el-checkbox v-model="form.rememberme"><span style="font-size: x-small">
-                Remember Me</span></el-checkbox>
+              <el-checkbox v-model="form.rememberme"><i><span style="font-size: x-small">
+                Remember Me</span></i></el-checkbox>
             </el-row>
             <el-row>
               <el-link type="info"><i><span style="font-size: x-small">
@@ -49,10 +49,10 @@
           </el-col>
         </el-row>
       </div>
-      <el-divider><span style="font-size: x-small">
+      <el-divider style="background-color: lightsteelblue"><span style="font-size: x-small; background-color: lightsteelblue">
         Not one of us?</span></el-divider>
       <div>
-        <el-button>
+        <el-button @click="router.push('/register')">
           Register now!
         </el-button>
       </div>
@@ -93,11 +93,16 @@ const login = () => {
 <style scoped>
 
 .custom-container {
+  height: 400px;
+  width: 600px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 20px;
+  background-color: lightsteelblue;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .form-item-wrapper {

@@ -14,18 +14,19 @@ const logout = () => {
 
 <template>
 
-<div class="centered-content">
-  <p>confirm logout?</p>
-  <el-button @click="logout()" type="danger">Logout</el-button>
-</div>
+  <div class="main-container">
+    <p style="color: antiquewhite">confirm logout?</p>
+    <el-button @click="logout()" type="danger">Logout</el-button>
+  </div>
+
 </template>
 
 <style scoped>
-.centered-content {
+.main-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #333;
 }
 </style>
