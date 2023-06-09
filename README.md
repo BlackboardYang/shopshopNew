@@ -1,5 +1,5 @@
 # shopshopNew
-A shop using vue SpringBoot and MyBatis
+A web shop build w/ Vue SpringBoot and MyBatis
 
 ```
   .   ____          _            __ _ _
