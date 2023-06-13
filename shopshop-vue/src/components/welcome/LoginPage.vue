@@ -1,4 +1,3 @@
-
 <template>
   <div class="custom-container">
     <div>
@@ -43,16 +42,19 @@
                 Remember Me</span></i></el-checkbox>
             </el-row>
             <el-row>
-              <el-link type="info"><i><span style="font-size: x-small">
+              <el-link type="info" @click="router.push('/forget')"><i><span style="font-size: x-small">
                 Forget password?</span></i></el-link>
             </el-row>
           </el-col>
         </el-row>
       </div>
-      <el-divider style="background-color: lightsteelblue"><span style="font-size: x-small; background-color: lightsteelblue">
-        Not one of us?</span></el-divider>
-      <div>
-        <el-button @click="router.push('/register')">
+      <el-divider style="margin-bottom: 10px" />
+      <div style="margin-top: 0">
+        <span style="font-size: x-small; color: slategrey">
+        Not one of us?</span>
+      </div>
+      <div style="margin-top: 30px">
+        <el-button @click="router.push('/register')" color="#6495ed" >
           Register now!
         </el-button>
       </div>
@@ -67,6 +69,7 @@ import {reactive} from "vue";
 import {ElMessage} from "element-plus";
 import {post} from "@/api";
 import router from "@/router";
+
 const form = reactive({
   username: '',
   password: '',
@@ -74,7 +77,7 @@ const form = reactive({
 })
 
 const login = () => {
-  if((!form.username) || (!form.password)){
+  if ((!form.username) || (!form.password)) {
     ElMessage.warning('please enter something')
   } else {
     post('/api/auth/login', {
@@ -100,7 +103,8 @@ const login = () => {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-color: lightsteelblue;
+  backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

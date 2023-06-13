@@ -4,9 +4,7 @@ import com.panacea.shopshop.model.ShopUser;
 import com.panacea.shopshop.model.ShopUserExample;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface ShopUserMapper {
@@ -14,7 +12,11 @@ public interface ShopUserMapper {
     @Select("SELECT * FROM shop_user WHERE username = #{text} or email = #{text}")
     ShopUser searchByNameOrEmail(String text);
 
+    @Insert("INSERT INTO shop_user (username, password, email) VALUES (#{username}, #{password}, #{email})")
+    int createAccount(String username, String password, String email);
 
+    @Update("UPDATE shop_user SET password = #{password} WHERE email = #{email}")
+    int updatePasswordByEmail(String password, String email);
 
 //
 //    ShopUser selectByEmailOrUsername(@Param("username") String username);

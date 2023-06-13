@@ -14,6 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -34,6 +35,8 @@ public class AuthServiceImpl implements AuthService {
     @Resource
     StringRedisTemplate template;
 
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if (username == null) {
@@ -41,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
         }
         ShopUser shopUser = shopUserMapper.searchByNameOrEmail(username);
         if (shopUser == null) {
-            throw new UsernameNotFoundException("username or password verify failed!!!");
+            throw new UsernameNotFoundException("username or password verification failed!!!");
         }
         return User
                 .withUsername(shopUser.getUsername())
@@ -51,13 +54,18 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override//邮箱发送验证码
-    public boolean sendValidateEmail(String email, String sessionId) {
+    public String sendValidateEmail(String email, String sessionId, boolean hasAccount) {
         //判断是否存在该key 以及 3 分钟过期时间限制
-        String key = "email: " + sessionId + ":" + email;
-        if(Boolean.TRUE.equals(template.hasKey(key))){
+        String key = "email:" + email + ":" + sessionId + ":" + hasAccount;
+        if (Boolean.TRUE.equals(template.hasKey(key))) {
             Long expire = Optional.ofNullable(template.getExpire(key, TimeUnit.SECONDS)).orElse(0L);
-            if(expire > 120) return false;
+            if (expire > 120) return "Request too frequently, please try later";
         }
+
+        ShopUser shopUser = shopUserMapper.searchByNameOrEmail(email);
+        if (hasAccount && (shopUser == null)) return "Cannot find this Email address";
+        if (!hasAccount && (shopUser != null)) return "This Email address has been used";
+
 
         //生成随机验证码
         Random random = new Random();
@@ -76,11 +84,59 @@ public class AuthServiceImpl implements AuthService {
         //发送操作并设定 3 分钟期限
         try {
             mailSender.send(message);
-            template.opsForValue().set(key, String.valueOf(code),3 , TimeUnit.MINUTES);
-            return true;
+            template.opsForValue().set(key, String.valueOf(code), 3, TimeUnit.MINUTES);
+            return "Mail sent!";
         } catch (MailException e) {
             e.printStackTrace();
-            return false;
+            return "Send fail, please check the mail address";
         }
+    }
+
+    @Override
+    public String validateAndRegister(String username, String password, String email, String code, String sessionId) {
+
+        String key = "email:" + email + ":" + sessionId + ":" + false;
+
+        if (Boolean.TRUE.equals(template.hasKey(key))) {
+            String keyCheck = template.opsForValue().get(key);
+            if (keyCheck == null) return "Verification code was expired, please request again";
+            if (keyCheck.equals(code)) {
+                ShopUser shopUser = shopUserMapper.searchByNameOrEmail(username);
+                template.delete(key);
+                password = encoder.encode(password);
+                return (shopUserMapper.createAccount(username, password, email) > 0) ?
+                        null : "Something wired, please contact us";
+            } else {
+                return "Verification code error, please check your code";
+            }
+        } else {
+            return "Get verification code first please";
+        }
+    }
+
+    @Override
+    public String validateOnly(String email, String code, String sessionId) {
+
+        String key = "email:" + email + ":" + sessionId + ":" + true;
+        System.out.println(key);
+        if (Boolean.TRUE.equals(template.hasKey(key))) {
+            String keyCheck = template.opsForValue().get(key);
+            if (keyCheck == null) return "Verification code was expired, please request again";
+            if (keyCheck.equals(code)) {
+                template.delete(key);
+                return null;
+            } else {
+                return "Verification code error, please check your code";
+            }
+        } else {
+            return "Get verification code first please";
+        }
+    }
+
+    @Override
+    public boolean resetPassword(String password, String email) {
+
+        password = encoder.encode(password);
+        return shopUserMapper.updatePasswordByEmail(password, email) > 0;
     }
 }
