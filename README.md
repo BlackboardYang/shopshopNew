@@ -26,3 +26,4 @@ A web shop build w/ Vue SpringBoot and MyBatis
 - ![Spring Boot](https://a11ybadges.com/badge?logo=springboot) ![Apache Maven](https://a11ybadges.com/badge?logo=apachemaven) Spring Boot 3 (Maven)(Spring Security 6)
 - ![MySQL](https://a11ybadges.com/badge?logo=mysql) MySQL (MyBatis3.x)
 - ![Amazon AWS](https://a11ybadges.com/badge?logo=amazonaws) AWS
+- ![Redis](https://a11ybadges.com/badge?logo=redis) Redis
