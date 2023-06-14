@@ -66,7 +66,7 @@
        Already have an Account?</span>
       </div>
       <div style="margin-top: 30px">
-        <el-button @click="router.push('../')" color="#6495ed">Sign In</el-button>
+        <el-button @click="router.push('../welcome/login')" color="#6495ed">Sign In</el-button>
       </div>
     </div>
   </div>
@@ -153,7 +153,7 @@ const register = () => {
               code: form.code
             }, (message) => {
               ElMessage.success(message)
-              router.push("/")
+              router.push("../welcome/login")
             }
         )
       }

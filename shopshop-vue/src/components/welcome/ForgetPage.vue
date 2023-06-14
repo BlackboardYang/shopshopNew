@@ -68,7 +68,7 @@
             title="Reset Complete!"
             sub-title="Login now">
           <template #extra>
-            <el-button @click="router.push('../')" color="#6495ed">Sign In</el-button>
+            <el-button @click="router.push('../welcome/login')" color="#6495ed">Sign In</el-button>
           </template>
         </el-result>
       </div>

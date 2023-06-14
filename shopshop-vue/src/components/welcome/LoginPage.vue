@@ -42,7 +42,7 @@
                 Remember Me</span></i></el-checkbox>
             </el-row>
             <el-row>
-              <el-link type="info" @click="router.push('/forget')"><i><span style="font-size: x-small">
+              <el-link type="info" @click="router.push('../welcome/forget')"><i><span style="font-size: x-small">
                 Forget password?</span></i></el-link>
             </el-row>
           </el-col>
@@ -54,7 +54,7 @@
         Not one of us?</span>
       </div>
       <div style="margin-top: 30px">
-        <el-button @click="router.push('/register')" color="#6495ed" >
+        <el-button @click="router.push('../welcome/register')" color="#6495ed" >
           Register now!
         </el-button>
       </div>
@@ -86,7 +86,7 @@ const login = () => {
       rememberme: form.rememberme
     }, (message) => {
       ElMessage.success(message)
-      router.push('/index')
+      router.push('/')
     })
   }
 }

@@ -1,32 +1,17 @@
 <script setup>
-import {get} from "@/api";
-import {ElMessage} from "element-plus";
-import router from "@/router";
-
-const logout = () => {
-  get('api/auth/logout', (message) => {
-    ElMessage.success(message)
-    router.push('/')
-  })
-}
-
+import HomeCategory from '@/components/home/HomeCategory.vue'
+import HomeBanner from '@/components/home/HomeBanner.vue'
+import HomeNew from '@/components/home/HomeNew.vue'
+import HomeHot from '@/components/home/HomeHot.vue'
+import homeProduct from '@/components/home/HomeProduct.vue'
 </script>
 
 <template>
-
-  <div class="main-container">
-    <p style="color: antiquewhite">confirm logout?</p>
-    <el-button @click="logout()" type="danger">Logout</el-button>
+  <div class="container">
+    <HomeCategory />
+    <HomeBanner />
   </div>
-
+  <HomeNew />
+  <HomeHot />
+  <homeProduct />
 </template>
-
-<style scoped>
-.main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #333;
-}
-</style>

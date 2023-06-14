@@ -1,10 +1,4 @@
 <script setup>
-import HomeCategory from '@/components/home/HomeCategory.vue'
-import HomeBanner from '@/components/home/HomeBanner.vue'
-import HomeNew from '@/components/home/HomeNew.vue'
-import HomeHot from '@/components/home/HomeHot.vue'
-import homeProduct from '@/components/home/HomeProduct.vue'
-
 import {get} from "@/api";
 import {ElMessage} from "element-plus";
 import router from "@/router";
@@ -15,6 +9,7 @@ const logout = () => {
     router.push('../welcome/login')
   })
 }
+
 </script>
 
 <template>
@@ -24,11 +19,14 @@ const logout = () => {
     <el-button @click="logout()" type="danger">Logout</el-button>
   </div>
 
-  <div class="container">
-    <HomeCategory/>
-    <HomeBanner/>
-  </div>
-  <HomeNew/>
-  <HomeHot/>
-  <homeProduct/>
 </template>
+
+<style scoped>
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #333;
+}
+</style>
