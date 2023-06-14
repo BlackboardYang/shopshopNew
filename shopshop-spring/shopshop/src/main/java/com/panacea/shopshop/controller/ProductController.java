@@ -15,6 +15,7 @@ public class ProductController {
 	
 	@Autowired
 	ProductMapper productMapper;
+
 	
 	@PostMapping("/insert")
 	public int insert(Product product) {
