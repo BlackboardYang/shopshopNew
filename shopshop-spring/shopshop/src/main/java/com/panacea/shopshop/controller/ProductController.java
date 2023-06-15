@@ -29,7 +29,7 @@ public class ProductController {
 		
 	}
 	
-	@GetMapping("/selectAll")
+	@GetMapping("/selectAllProduct")
 	public Result<List<Product>> selectAll() {
 		List<Product> productList = productMapper.selectAll();
 //		Result<List<Product>> productResult = productList.success();

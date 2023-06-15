@@ -9,7 +9,7 @@ import {useCategoryStore} from "@/stores/categoryStore";
 
 const categoryStore = useCategoryStore()
 
-onMounted(()=> categoryStore.getCategory())
+onMounted(()=> categoryStore.getLv0Category())
 
 </script>
 

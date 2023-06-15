@@ -7,11 +7,6 @@ const { y } = useScroll(window)
 
 const categoryStore = useCategoryStore()
 
-
-
-
-
-
 </script>
 
 <template>
