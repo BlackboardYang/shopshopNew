@@ -2,6 +2,8 @@ package com.panacea.shopshop.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Category {
 
@@ -12,5 +14,7 @@ public class Category {
     private Integer level;
 
     private String name;
+
+    private List<Category> children;
 
 }

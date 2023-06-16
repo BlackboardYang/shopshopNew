@@ -1,12 +1,9 @@
 package com.panacea.shopshop.service.impl;
 
 import com.panacea.shopshop.mapper.CategoryMapper;
-
 import com.panacea.shopshop.model.Category;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -14,6 +11,8 @@ public class CategoryServiceImpl implements CategoryMapper {
 
     @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
 
     @Override
     public List<Category> selectAll() {
@@ -33,6 +32,11 @@ public class CategoryServiceImpl implements CategoryMapper {
     @Override
     public int insert(int id, int parentId, int level, String name) {
         return 0;
+    }
+
+    @Override
+    public List<Category> listWithChildren() {
+        return categoryMapper.listWithChildren();
     }
 
 
