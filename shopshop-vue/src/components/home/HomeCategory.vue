@@ -14,19 +14,19 @@ const categoryStore = useCategoryStore()
         <div class="layer">
           <h4>分类推荐 <small>根据您的购买或浏览记录推荐</small></h4>
           <ul>
-            <li v-for="i in 5" :key="i">
+            <li v-for="i in item.products" :key="i.id">
               <RouterLink to="/">
                 <img alt="" />
                 <div class="info">
                   <p class="name ellipsis-2">
-                    男士外套
+                    {{ i.name }}
                   </p>
-                  <p class="desc ellipsis">男士外套，冬季必选</p>
-                  <p class="price"><i>¥</i>200.00</p>
+                  <p class="desc ellipsis">{{ i.description }}</p>
+                  <p class="price"><i>¥</i>{{ i.price }}</p>
                 </div>
               </RouterLink>
-            </li>
-          </ul>
+                </li>
+              </ul>
         </div>
       </li>
     </ul>
@@ -38,7 +38,7 @@ const categoryStore = useCategoryStore()
 .home-category {
   width: 250px;
   height: 500px;
-  background: rgba(0, 0, 0, 0.8);
+  background: #90a8c3;
   position: relative;
   z-index: 99;
 
@@ -107,7 +107,7 @@ const categoryStore = useCategoryStore()
               padding: 10px;
 
               &:hover {
-                background: #e3f9f4;
+                background: #fff0f4;
               }
 
               img {

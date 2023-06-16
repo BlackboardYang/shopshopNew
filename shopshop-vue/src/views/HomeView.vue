@@ -18,12 +18,6 @@ const logout = () => {
 </script>
 
 <template>
-
-  <div class="main-container">
-    <p style="color: antiquewhite">confirm logout?</p>
-    <el-button @click="logout()" type="danger">Logout</el-button>
-  </div>
-
   <div class="container">
     <HomeCategory/>
     <HomeBanner/>

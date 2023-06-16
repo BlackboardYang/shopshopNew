@@ -32,7 +32,7 @@ const categoryStore = useCategoryStore()
 
 <style scoped lang='scss'>
 .app-header {
-  background: #fff;
+  background: #ecdaea;
 
   .container {
     display: flex;
@@ -60,7 +60,7 @@ const categoryStore = useCategoryStore()
 
     li {
       margin-right: 40px;
-      width: 38px;
+      width: 70px;
       text-align: center;
 
       a {

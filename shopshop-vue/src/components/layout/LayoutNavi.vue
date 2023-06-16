@@ -1,5 +1,6 @@
 <script setup>
 
+import logout from "@/components/welcome/logout.vue";
 </script>
 
 <template>
@@ -11,7 +12,9 @@
           <li>
             <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
               <template #reference>
-                <a href="javascript:;">退出登录</a>
+                <div class="main-container">
+                  <el-button type="danger" text="退出登录" link @click="logout()">退出登录</el-button>
+                </div>
               </template>
             </el-popconfirm>
           </li>

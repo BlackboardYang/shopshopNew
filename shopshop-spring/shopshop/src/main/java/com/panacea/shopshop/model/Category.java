@@ -17,4 +17,6 @@ public class Category {
 
     private List<Category> children;
 
+    private List<Product> products;
+
 }

@@ -2,6 +2,7 @@
 
 import { useCategoryStore} from "@/stores/categoryStore";
 import { useScroll } from '@vueuse/core'
+import {Search} from "@element-plus/icons-vue";
 
 const { y } = useScroll(window)
 
@@ -19,6 +20,12 @@ const categoryStore = useCategoryStore()
           <RouterLink to="/">{{ item.name }}</RouterLink>
         </li>
       </ul>
+      <div class="search">
+        <el-form-item  prop="search">
+          <el-input placeholder="搜一搜" :prefix-icon="Search">
+          </el-input>
+        </el-form-item>
+      </div>
 
 <!--      <div class="right">-->
 <!--        <RouterLink to="/">品牌</RouterLink>-->
@@ -71,7 +78,7 @@ const categoryStore = useCategoryStore()
     border-left: 2px solid $xtxColor;
 
     a {
-      width: 38px;
+      width: 50  px;
       margin-right: 40px;
       font-size: 16px;
       line-height: 1;
@@ -92,7 +99,7 @@ const categoryStore = useCategoryStore()
 
   li {
     margin-right: 40px;
-    width: 38px;
+    width: 70px;
     text-align: center;
 
     a {
