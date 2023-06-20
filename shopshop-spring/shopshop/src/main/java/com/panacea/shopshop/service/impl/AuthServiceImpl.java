@@ -139,4 +139,5 @@ public class AuthServiceImpl implements AuthService {
         password = encoder.encode(password);
         return shopUserMapper.updatePasswordByEmail(password, email) > 0;
     }
+
 }

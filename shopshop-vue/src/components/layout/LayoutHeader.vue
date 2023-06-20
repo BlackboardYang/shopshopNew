@@ -1,6 +1,12 @@
 <script setup>
-import { useCategoryStore} from "@/stores/categoryStore";
+import {useCategoryStore} from "@/stores/categoryStore";
 import {Search, User} from "@element-plus/icons-vue";
+import {get} from "@/api";
+import {ElMessage} from "element-plus";
+import router from "@/router";
+import {ref} from "vue";
+
+const categoryList = ref([])
 
 const categoryStore = useCategoryStore()
 
@@ -18,7 +24,7 @@ const categoryStore = useCategoryStore()
         </li>
       </ul>
       <div class="search">
-        <el-form-item  prop="search">
+        <el-form-item prop="search">
           <el-input placeholder="搜一搜" :prefix-icon="Search">
           </el-input>
         </el-form-item>

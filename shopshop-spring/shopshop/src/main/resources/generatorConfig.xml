@@ -12,7 +12,7 @@
 		</jdbcConnection>
 		
 		<javaModelGenerator
-			targetPackage="com.panacea.shopshop.model"
+			targetPackage="com.panacea.shopshop.generator"
 			targetProject="shopshop/src/main/java" />
 			
 		<sqlMapGenerator
@@ -20,10 +20,10 @@
 			targetProject="shopshop/src/main/resources" />
 			
 		<javaClientGenerator
-			targetPackage="com.panacea.shopshop.mapper"
+			targetPackage="com.panacea.shopshop.generator"
 			targetProject="shopshop/src/main/java" type="XMLMAPPER" />
 			
-		<table tableName="shop_user">
+		<table tableName="product">
 		</table>
 		
 	</context>

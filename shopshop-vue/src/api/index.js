@@ -4,6 +4,7 @@ import { useUserStore } from '@/stores/userStore'
 
 const defaultError = () => ElMessage.error('I have a bad feeling about this...')
 const defaultFailure = (message) => ElMessage.warning(message)
+
 function post(url, data, success, failure = defaultFailure, error = defaultError){
     axios.post(url, data, {
         headers: {

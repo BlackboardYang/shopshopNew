@@ -7,8 +7,8 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,7 +45,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
-                        .requestMatchers(("/api/auth/**"), ("/home/category/**")).permitAll()
+                        .requestMatchers(("/api/auth/**"), ("/home/category/**"), ("/product/**")).permitAll()
                 .anyRequest().authenticated()
         ).formLogin(login -> login
                 .loginProcessingUrl("/api/auth/login")
@@ -89,23 +89,29 @@ public class SecurityConfig {
         return configurationSource;
     }
 
-
-//    @Bean
-//    public AuthenticationManager authenticationManager(HttpSecurity security) throws Exception {
-//        return security.getSharedObject(AuthenticationManagerBuilder.class)
-//                .userDetailsService(authServiceImpl)
-//                .and().build();
-//    }
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.setCharacterEncoding("utf-8");
+//        // 生成令牌
+//        String token = Jwts.builder()
+//                .setSubject(authentication.getName())  // 设置用户名作为令牌主题
+//                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))  // 设置令牌过期时间
+//                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)  // 使用密钥对令牌进行签名
+//                .compact();
+//
+//        // 将令牌添加到响应中
+//        response.addHeader("Authorization", "Bearer " + token);
+//        response.setContentType("application/json");
+//        response.setCharacterEncoding("UTF-8");
+//        response.getWriter().write(objectMapper.writeValueAsString(RestBean.success("Login Success!ログイン成功！登录成功！")));
+
+                response.setCharacterEncoding("utf-8");
+
         if (request.getRequestURI().endsWith("/login")) {
-            response.getWriter().write(objectMapper.writeValueAsString(RestBean.success("Login Success!ログイン成功！登录成功！")));
+            response.getWriter().write(objectMapper.writeValueAsString(RestBean.success(authentication.getName())));
         } else if (request.getRequestURI().endsWith("/logout")) {
             response.getWriter().write(objectMapper.writeValueAsString(RestBean.success("You are logged out.")));
         }

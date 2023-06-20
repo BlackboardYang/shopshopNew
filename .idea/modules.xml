@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/shopshop-admin/shopshop-admin.iml" filepath="$PROJECT_DIR$/shopshop-admin/shopshop-admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/shopshop-vue/shopshop-vue.iml" filepath="$PROJECT_DIR$/shopshop-vue/shopshop-vue.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/shopshopNew.iml" filepath="$PROJECT_DIR$/.idea/shopshopNew.iml" />
     </modules>

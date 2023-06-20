@@ -1,10 +1,10 @@
 <script setup>
 
-import { useCategoryStore} from "@/stores/categoryStore";
-import { useScroll } from '@vueuse/core'
+import {useCategoryStore} from "@/stores/categoryStore";
+import {useScroll} from '@vueuse/core'
 import {Search} from "@element-plus/icons-vue";
 
-const { y } = useScroll(window)
+const {y} = useScroll(window)
 
 const categoryStore = useCategoryStore()
 
@@ -13,7 +13,7 @@ const categoryStore = useCategoryStore()
 <template>
   <div class="app-header-sticky" :class="{show : y > 78}">
     <div class="container">
-      <RouterLink class="logo" to="/" />
+      <RouterLink class="logo" to="/"/>
       <!-- 导航区域 -->
       <ul class="app-header-nav">
         <li class="home" v-for="item in categoryStore.categoryList" :key="item.id">
@@ -21,16 +21,16 @@ const categoryStore = useCategoryStore()
         </li>
       </ul>
       <div class="search">
-        <el-form-item  prop="search">
+        <el-form-item prop="search">
           <el-input placeholder="搜一搜" :prefix-icon="Search">
           </el-input>
         </el-form-item>
       </div>
 
-<!--      <div class="right">-->
-<!--        <RouterLink to="/">品牌</RouterLink>-->
-<!--        <RouterLink to="/">专题</RouterLink>-->
-<!--      </div>-->
+      <!--      <div class="right">-->
+      <!--        <RouterLink to="/">品牌</RouterLink>-->
+      <!--        <RouterLink to="/">专题</RouterLink>-->
+      <!--      </div>-->
     </div>
   </div>
 </template>
@@ -78,7 +78,7 @@ const categoryStore = useCategoryStore()
     border-left: 2px solid $xtxColor;
 
     a {
-      width: 50  px;
+      width: 50px;
       margin-right: 40px;
       font-size: 16px;
       line-height: 1;

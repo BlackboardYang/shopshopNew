@@ -3,17 +3,22 @@ package com.panacea.shopshop.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.apache.ibatis.session.SqlSession;
+
 
 import com.panacea.shopshop.mapper.ProductMapper;
 import com.panacea.shopshop.model.Product;
 import com.panacea.shopshop.model.ProductExample;
 
 @Service
+@Component
 public class ProductServiceImpl implements ProductMapper{
-	
+
 	@Autowired
 	private ProductMapper productMapper;
+
 
 	@Override
 	public List<Product> selectAll() {
@@ -21,28 +26,35 @@ public class ProductServiceImpl implements ProductMapper{
 	}
 
 	@Override
-	public int deleteByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
+	public int deleteByPrimaryKey(Integer id) {
 		return productMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int updateByPrimaryKey(Product row) {
-		// TODO Auto-generated method stub
 		return productMapper.updateByPrimaryKey(row);
 	}
 
 	@Override
-	public Product selectByPrimaryKey(String id) {
-		// TODO Auto-generated method stub
+	public Product selectByPrimaryKey(Integer id) {
 		return productMapper.selectByPrimaryKey(id);
 	}
 
+//	private final SqlSession sqlSession;
+//	public ProductServiceImpl(SqlSession sqlSession) {
+//		this.sqlSession = sqlSession;
+//	}
+//	@Override
+//	public Product selectByPrimaryKey(Integer id) {
+//		//return productMapper.selectByPrimaryKey(id);
+//		return this.sqlSession.selectOne("selectByPrimaryKey", id);
+//	}
+
 	@Override
-	public int insert(Product row) {
-		// TODO Auto-generated method stub
+	public Product insert(Product row) {
 		return productMapper.insert(row);
 	}
+
 
 	@Override
 	public long countByExample(ProductExample example) {
@@ -79,7 +91,5 @@ public class ProductServiceImpl implements ProductMapper{
 		return 0;
 	}
 
-
-	
 
 }

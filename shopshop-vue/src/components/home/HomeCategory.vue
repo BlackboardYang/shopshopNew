@@ -8,7 +8,7 @@ const categoryStore = useCategoryStore()
   <div class="home-category">
     <ul class="menu">
       <li v-for="item in categoryStore.categoryList" :key="item">
-        <RouterLink to="/">{{item.name}}:</RouterLink>
+        <RouterLink to="/">{{ item.name }}:</RouterLink>
         <RouterLink v-for="i in item.children.slice(0,2)" :key="i" to="/">{{ i.name }}</RouterLink>
         <!-- 弹层layer位置 -->
         <div class="layer">
@@ -16,7 +16,7 @@ const categoryStore = useCategoryStore()
           <ul>
             <li v-for="i in item.products" :key="i.id">
               <RouterLink to="/">
-                <img alt="" />
+                <img alt=""/>
                 <div class="info">
                   <p class="name ellipsis-2">
                     {{ i.name }}
@@ -25,8 +25,8 @@ const categoryStore = useCategoryStore()
                   <p class="price"><i>¥</i>{{ i.price }}</p>
                 </div>
               </RouterLink>
-                </li>
-              </ul>
+            </li>
+          </ul>
         </div>
       </li>
     </ul>

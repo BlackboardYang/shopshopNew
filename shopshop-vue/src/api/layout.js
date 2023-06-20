@@ -6,7 +6,6 @@ export function getCategoryAPI () {
     })
 }
 
-
 // export function getCategoryAPI() {
 //     return httpInstance("/home/category/cat-level", {
 //         params: {

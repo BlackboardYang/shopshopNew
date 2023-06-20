@@ -1,6 +1,15 @@
 <script setup>
 
-import logout from "@/components/welcome/logout.vue";
+import router from "@/router";
+import {get} from "@/api";
+import {ElMessage} from "element-plus";
+
+const logout = () => {
+  get('api/auth/logout', (message) => {
+    ElMessage.success(message)
+    router.push('/welcome/login')
+  })
+}
 </script>
 
 <template>
@@ -8,16 +17,13 @@ import logout from "@/components/welcome/logout.vue";
     <div class="container">
       <ul>
         <template v-if="true">
-          <li><a href="javascript:"><i class="iconfont icon-user"></i>周杰伦</a></li>
-          <li>
-            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
-              <template #reference>
-                <div class="main-container">
-                  <el-button type="danger" text="退出登录" link @click="logout()">退出登录</el-button>
-                </div>
-              </template>
-            </el-popconfirm>
-          </li>
+          <li><a href="javascript:"><i class="iconfont icon-user"></i>用户</a></li>
+          <li><a>
+            <el-button type="success" text="登录" link @click="router.push('../welcome/login')">登录</el-button>
+          </a></li>
+          <li><a>
+            <el-button type="danger" text="退出登录" link @click="logout()">退出登录</el-button>
+          </a></li>
           <li><a href="javascript:;">我的订单</a></li>
           <li><a href="javascript:;">会员中心</a></li>
         </template>
@@ -35,11 +41,13 @@ import logout from "@/components/welcome/logout.vue";
 <style scoped lang="scss">
 .app-topnav {
   background: #333;
+
   ul {
     display: flex;
     height: 53px;
     justify-content: flex-end;
     align-items: center;
+
     li {
       a {
         padding: 0 15px;
@@ -57,7 +65,7 @@ import logout from "@/components/welcome/logout.vue";
         }
       }
 
-      ~li {
+      ~ li {
         a {
           border-left: 2px solid #666;
         }
