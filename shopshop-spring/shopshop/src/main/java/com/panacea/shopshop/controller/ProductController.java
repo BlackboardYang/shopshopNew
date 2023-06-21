@@ -24,15 +24,15 @@ public class ProductController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public Result<Product> insert(@RequestBody Product product) {
-		System.out.println("Here!!!!!!");
-		Product result = productService.insert(product);
-		return Result.success(result,"ok");
+		int result = productService.insertProduct(product);
+		return (result == 0)? Result.fail("Add Fail") : Result.success("ok");
 	}
 	
 	@PutMapping("/updateById")
-	public int updateById(@RequestBody Product product) {
-		return productService.updateByPrimaryKey(product);
-		
+	public Result<Product> updateById(@RequestBody Product product) {
+		productService.updateByPrimaryKey(product);
+		Integer id = product.getId();
+		return Result.success("id: " + id + "Information updated!");
 	}
 	
 	@GetMapping("/selectAllProduct")
@@ -49,10 +49,11 @@ public class ProductController {
 		return Result.success(result,"ok");
 		
 	}
-	
-	@DeleteMapping("/deleteById/{id}")
-	public int deleteById(@PathVariable("id") Integer id) {
-		return productMapper.deleteByPrimaryKey(id);
+
+	@RequestMapping(value = "/deleteById", method = RequestMethod.GET)
+	public Result<Product> deleteById(@RequestParam("id") Integer id) {
+		productService.deleteByPrimaryKey(id);
+		return Result.success("id: " + id + "deleted success!");
 	}
 	
 

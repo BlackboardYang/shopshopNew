@@ -2,6 +2,7 @@ package com.panacea.shopshop.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class ProductServiceImpl implements ProductMapper{
 	@Autowired
 	private ProductMapper productMapper;
 
+	@Autowired
+	private SqlSessionFactory sqlSessionFactory;
+
 
 	@Override
 	public List<Product> selectAll() {
@@ -27,7 +31,30 @@ public class ProductServiceImpl implements ProductMapper{
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
-		return productMapper.deleteByPrimaryKey(id);
+		productMapper.deleteByPrimaryKey(id);
+		return id;
+	}
+
+//	@Override
+//	public int insert(Product row) {
+//		productMapper.insert(row);
+//		int affactedEntryNum =
+//		return ;
+//	}
+
+
+	// 构造方法或注入方式设置SqlSessionFactory
+
+	@Override
+	public int insertProduct(Product row) {
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			int rowsAffected = session.insert("insertProduct", row);
+			session.commit();
+			return rowsAffected;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	@Override
@@ -49,12 +76,6 @@ public class ProductServiceImpl implements ProductMapper{
 //		//return productMapper.selectByPrimaryKey(id);
 //		return this.sqlSession.selectOne("selectByPrimaryKey", id);
 //	}
-
-	@Override
-	public Product insert(Product row) {
-		return productMapper.insert(row);
-	}
-
 
 	@Override
 	public long countByExample(ProductExample example) {

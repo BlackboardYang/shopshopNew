@@ -90,34 +90,35 @@
 
   <select id="selectByPrimaryKey" resultType="com.panacea.shopshop.model.Product">
     select
-    *
+      *
     from product
     where id = #{id}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Double">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from product
-    where id = #{id,jdbcType=DOUBLE}
+    where id = #{id}
   </delete>
 
-  <insert id="insert" parameterType="com.panacea.shopshop.model.Product">
-    insert into product (id, parent_id, level,
-    product_count, name, price,
-    description)
-    values (#{id,jdbcType=DOUBLE}, #{parentId,jdbcType=DOUBLE}, #{level,jdbcType=INTEGER},
-    #{productCount,jdbcType=DOUBLE}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE},
-    #{description,jdbcType=VARCHAR})
+  <insert id="insertProduct" useGeneratedKeys="true" keyProperty="id" parameterType="com.panacea.shopshop.model.Product">
+    insert into product (parent_id, level,
+                         product_count, name, price,
+                         description)
+    values (#{parentId}, #{level},
+            #{productCount}, #{name}, #{price},
+            #{description})
   </insert>
+
 
   <update id="updateByPrimaryKey" parameterType="com.panacea.shopshop.model.Product">
     update product
-    set parent_id = #{parentId,jdbcType=DOUBLE},
-    level = #{level,jdbcType=INTEGER},
-    product_count = #{productCount,jdbcType=DOUBLE},
-    name = #{name,jdbcType=VARCHAR},
-    price = #{price,jdbcType=DOUBLE},
-    description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=DOUBLE}
+    set parent_id = #{parentId},
+        level = #{level},
+        product_count = #{productCount},
+        name = #{name},
+        price = #{price},
+        description = #{description}
+    where id = #{id}
   </update>
 
   <select id="selectByExample" parameterType="com.panacea.shopshop.model.ProductExample" resultMap="ProductResultMap">
@@ -182,25 +183,25 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=DOUBLE},
+        #{id},
       </if>
       <if test="parentId != null">
-        #{parentId,jdbcType=DOUBLE},
+        #{parentId},
       </if>
       <if test="level != null">
-        #{level,jdbcType=INTEGER},
+        #{level},
       </if>
       <if test="productCount != null">
-        #{productCount,jdbcType=DOUBLE},
+        #{productCount},
       </if>
       <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+        #{name},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DOUBLE},
+        #{price},
       </if>
       <if test="description != null">
-        #{description,jdbcType=VARCHAR},
+        #{description},
       </if>
     </trim>
   </insert>
@@ -224,25 +225,25 @@
     update product
     <set>
       <if test="row.id != null">
-        id = #{row.id,jdbcType=DOUBLE},
+        id = #{row.id},
       </if>
       <if test="row.parentId != null">
-        parent_id = #{row.parentId,jdbcType=DOUBLE},
+        parent_id = #{row.parentId},
       </if>
       <if test="row.level != null">
-        level = #{row.level,jdbcType=INTEGER},
+        level = #{row.level},
       </if>
       <if test="row.productCount != null">
-        product_count = #{row.productCount,jdbcType=DOUBLE},
+        product_count = #{row.productCount},
       </if>
       <if test="row.name != null">
-        name = #{row.name,jdbcType=VARCHAR},
+        name = #{row.name},
       </if>
       <if test="row.price != null">
-        price = #{row.price,jdbcType=DOUBLE},
+        price = #{row.price},
       </if>
       <if test="row.description != null">
-        description = #{row.description,jdbcType=VARCHAR},
+        description = #{row.description},
       </if>
     </set>
     <if test="example != null">
@@ -256,13 +257,13 @@
       This element was generated on Mon Jun 19 01:40:23 JST 2023.
     -->
     update product
-    set id = #{row.id,jdbcType=DOUBLE},
-    parent_id = #{row.parentId,jdbcType=DOUBLE},
-    level = #{row.level,jdbcType=INTEGER},
-    product_count = #{row.productCount,jdbcType=DOUBLE},
-    name = #{row.name,jdbcType=VARCHAR},
-    price = #{row.price,jdbcType=DOUBLE},
-    description = #{row.description,jdbcType=VARCHAR}
+    set id = #{row.id},
+    parent_id = #{row.parentId},
+    level = #{row.level},
+    product_count = #{row.productCount},
+    name = #{row.name},
+    price = #{row.price},
+    description = #{row.description}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -276,25 +277,25 @@
     update product
     <set>
       <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=DOUBLE},
+        parent_id = #{parentId},
       </if>
       <if test="level != null">
-        level = #{level,jdbcType=INTEGER},
+        level = #{level},
       </if>
       <if test="productCount != null">
-        product_count = #{productCount,jdbcType=DOUBLE},
+        product_count = #{productCount},
       </if>
       <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+        name = #{name},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DOUBLE},
+        price = #{price},
       </if>
       <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
+        description = #{description},
       </if>
     </set>
-    where id = #{id,jdbcType=DOUBLE}
+    where id = #{id}
   </update>
 </mapper>
 

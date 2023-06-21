@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/shopshop-admin" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vue-vben-admin(deprecated)" vcs="Git" />
   </component>
 </project>

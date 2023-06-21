@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ProductMapper {
 
 	//@Insert("insert into product (id, parent_id, level, product_count, name, price,  description) values (#{id}, #{parentId}, #{level}, #{productCount}, #{name}, #{price}, #{description})")
-	Product insert(Product row);
+	int insertProduct(Product row);
 
 	//@Select("SELECT * FROM product WHERE id = #{id}")
 	Product selectByPrimaryKey(Integer id);
