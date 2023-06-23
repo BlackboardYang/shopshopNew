@@ -81,6 +81,7 @@
 
 <script>
 import axios from "axios";
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -92,6 +93,7 @@ export default {
   created() {
     this.fetchData()
   },
+
   methods: {
     fetchData() {
       axios.get("http://localhost:8081/product/selectAllProduct")

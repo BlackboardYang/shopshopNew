@@ -92,10 +92,11 @@ export default {
            }]
         }).then(response => {
           //console.log('qs请求数据:', qs.stringify(postData));
-          console.log('POST请求数据:', newData);
-          console.log('响应消息:', response.data);
+          // console.log('POST请求数据:', newData);
+          // console.log('响应消息:', response.data);
           this.$message.success(response.data.message);
           this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$store.commit('user/SET_NAME', this.loginForm.username);
             this.$router.push({ path: this.redirect || '/' })
           })
         }).catch(error => {
