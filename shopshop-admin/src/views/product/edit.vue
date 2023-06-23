@@ -24,7 +24,14 @@
         <el-button v-if="$route.query.id === undefined" type="success" @click="onSubmit">Confirm add product!</el-button>
         <!-- 判断是否显示"change!"按钮 -->
         <el-button v-else type="primary" @click="onSubmit">Confirm change!</el-button>
-        <el-button type="primary" @click="goBack">Cancel</el-button>
+        <el-divider direction="vertical"></el-divider>
+        <el-popconfirm
+          title="Are you sure leave with out any change？"
+          confirm-button-text="Yes"
+          cancel-button-text="Cancel"
+          @onConfirm="goBack">
+          <el-button slot="reference" type="primary">Back</el-button>
+        </el-popconfirm>
       </div>
 
     </el-form>

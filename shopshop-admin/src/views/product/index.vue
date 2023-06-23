@@ -20,7 +20,7 @@
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column label="Parent id" width="80" align="center">
+      <el-table-column label="Parent id" width="70" align="center">
         <template slot-scope="scope">
           {{ scope.row.parentId }}
         </template>
@@ -35,7 +35,7 @@
           {{ scope.row.price }}
         </template>
       </el-table-column>
-      <el-table-column label="Category Level" width="80" align="center">
+      <el-table-column label="Category Level" width="90" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.level }}</span>
         </template>

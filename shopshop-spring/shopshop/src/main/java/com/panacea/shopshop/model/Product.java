@@ -17,6 +17,6 @@ public class Product {
 
 	private String description;
 
-	private String productCount;
+	private Integer productCount;
 
 }
