@@ -4,7 +4,7 @@
       <div style="text-align: center">
         <h1 style="font-weight: bolder">Sign In</h1>
       </div>
-      <el-form>
+      <el-form ref="formRef" :model="form" :rules="rules">
         <el-form-item label="Username">
           <div class="form-item-wrapper">
             <el-input v-model="form.username" placeholder="Enter your username">
@@ -32,7 +32,7 @@
       <div>
         <el-row justify="space-between">
           <el-col :span="6">
-            <el-button type="primary" @click="login()" size="default" color="#626aef">
+            <el-button type="primary" @click="doLogin" size="default" color="#626aef">
               Login
             </el-button>
           </el-col>
@@ -48,13 +48,13 @@
           </el-col>
         </el-row>
       </div>
-      <el-divider style="margin-bottom: 10px" />
+      <el-divider style="margin-bottom: 10px"/>
       <div style="margin-top: 0">
         <span style="font-size: x-small; color: slategrey">
         Not one of us?</span>
       </div>
       <div style="margin-top: 30px">
-        <el-button @click="router.push('../welcome/register')" color="#6495ed" >
+        <el-button @click="router.push('../welcome/register')" color="#6495ed">
           Register now!
         </el-button>
       </div>
@@ -65,10 +65,11 @@
 <script setup>
 
 import {User, Unlock} from "@element-plus/icons-vue";
-import {reactive} from "vue";
+import {reactive, ref} from "vue";
 import {ElMessage} from "element-plus";
-import {post} from "@/api";
 import router from "@/router";
+import {loginAPI} from "@/api/user";
+import {useUserStore} from "@/stores/userStore";
 
 const form = reactive({
   username: '',
@@ -76,20 +77,102 @@ const form = reactive({
   rememberme: false,
 })
 
-const login = () => {
-  if ((!form.username) || (!form.password)) {
-    ElMessage.warning('please enter something')
-  } else {
-    post('/api/auth/login', {
-      username: form.username,
-      password: form.password,
-      rememberme: form.rememberme
-    }, (message) => {
-      ElMessage.success(message)
-      router.push('/')
-    })
-  }
+// const form = ref({
+//   username: '',
+//   password: '',
+//   rememberme: false,
+// })
+
+const rules = {
+  username: [
+    {required: true, message: '用户名不能为空', trigger: 'blur'}
+  ],
+  password: [
+    {required: true, message: '密码不能为空', trigger: 'blur'},
+    {min: 6, max: 14, message: '密码长度为6-14个字符', trigger: 'blur'},
+  ]
 }
+const formRef = reactive({value: null});
+
+const validateForm = () => {
+  const {username, password} = form;
+  if (!username) {
+    ElMessage.error("请输入用户名");
+    return false;
+  }
+  if (!password) {
+    ElMessage.error("请输入密码");
+    return false;
+  }
+  return true;
+};
+//const formRef = ref(null)
+const userStore = useUserStore()
+
+const doLogin = async () => {
+  if (validateForm()) {
+    const {username, password, rememberme} = form;
+    // 执行登录逻辑
+    await userStore.getUserInfo({username, password, rememberme});
+    // 其他登录逻辑
+  }
+// const doLogin = async () => {
+//   const { username, password, rememberme } = form.value
+//   await formRef.value.validate(async (valid) => {
+//     console.log(valid)
+//     if (valid) {
+//       await userStore.getUserInfo({username, password, rememberme})
+//       // loginAPI({ username, password, rememberme })
+//       //     .then((res) => {
+//       //       console.log(res)
+//       //       ElMessage.success('Login Success!')
+//       //       router.replace({ path: '/' })
+//       //     })
+//       //     .catch((error) => {
+//       //       console.error(error)
+//       //     })
+//     }
+  // else {
+  //   ElMessage.error('Check your username and password')
+  // }
+  // })
+}
+
+// const doLogin = async () => {
+//   const { username, password, rememberme } = form.value
+//   await formRef.value.validate(async (valid) => {
+//     console.log(valid)
+//     if (valid) {
+//       try {
+//         const res = await loginAPI({ username, password, rememberme })
+//         console.log(res)
+//         ElMessage.success('Login Success!')
+//         await router.replace({path: '/'})
+//       } catch (error) {
+//         console.error(error)
+//       }
+//     } else {
+//       ElMessage.error('Check your username and password')
+//     }
+//   })
+// }
+
+
+// const login = () => {
+//   if ((!form.username) || (!form.password)) {
+//     ElMessage.warning('please enter something')
+//   } else {
+//     post('/api/auth/login', {
+//       username: form.username,
+//       password: form.password,
+//       rememberme: form.rememberme
+//     }, (message) => {
+//       ElMessage.success(message)
+//       router.push('/')
+//     })
+//   }
+// }
+
 
 </script>
 

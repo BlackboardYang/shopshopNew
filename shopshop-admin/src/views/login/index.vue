@@ -52,6 +52,7 @@
 <script>
 import axios from 'axios';
 import qs from "qs";
+import {post} from "@/api";
 
 export default {
   data() {
@@ -72,39 +73,77 @@ export default {
       if (!this.loginForm.username || !this.loginForm.password) {
         this.$message.warning('please enter something');
       } else {
-        // const postData = {
-        //   username: this.loginForm.username,
-        //   password: this.loginForm.password,
-        //   rememberme: true
-        // };
-        // const newData = qs.stringify(postData)
-
-        axios.post('http://localhost:8081/api/auth/login', {
+        const url = 'http://localhost:8081/api/auth/login';
+        const data = {
           username: this.loginForm.username,
           password: this.loginForm.password,
-          rememberme: true}, {
-          headers: {
-             'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          withCredentials: true,
-          transformRequest: [function (data) {
-              return qs.stringify(data)
-           }]
-        }).then(response => {
-          //console.log('qs请求数据:', qs.stringify(postData));
-          // console.log('POST请求数据:', newData);
-          // console.log('响应消息:', response.data);
-          this.$message.success(response.data.message);
+          rememberme: true
+        };
+        const qsData = qs.stringify(data)
+        post(url, qsData, (message, status) => {
+          //console.log(newData)
+          // 请求成功的处理逻辑
+
+          this.$message({
+            message: 'Login success!',
+            type: 'success'
+          });
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$store.commit('user/SET_NAME', this.loginForm.username);
-            this.$router.push({ path: this.redirect || '/' })
-          })
-        }).catch(error => {
-          console.error('请求出错:', error);
+            this.$router.push({ path: this.redirect || '/' });
+          });
+        }, (message, status) => {
+          // 请求失败的处理逻辑
+          this.$message.error('Please check your username and password');
+          console.error('error:', message, status);
           // 处理错误逻辑
         });
       }
     }
+    // onLogin() {
+    //   if (!this.loginForm.username || !this.loginForm.password) {
+    //     this.$message.warning('please enter something');
+    //   } else {
+    //     // const postData = {
+    //     //   username: this.loginForm.username,
+    //     //   password: this.loginForm.password,
+    //     //   rememberme: true
+    //     // };
+    //     // const newData = qs.stringify(postData)
+    //
+    //     axios.post('http://localhost:8081/api/auth/login', {
+    //       username: this.loginForm.username,
+    //       password: this.loginForm.password,
+    //       rememberme: true}, {
+    //       headers: {
+    //          'Content-Type': 'application/x-www-form-urlencoded'
+    //       },
+    //       withCredentials: true,
+    //       transformRequest: [function (data) {
+    //           return qs.stringify(data)
+    //        }]
+    //     })
+    //     //   .then(response => {
+    //     //   // console.log('qs请求数据:', qs.stringify(postData));
+    //     //   // console.log('POST请求数据:', newData);
+    //     //   // console.log('响应消息:', response.data);
+    //     //   this.$message.success(response.data.message);
+    //     //   this.$store.dispatch('user/login', this.loginForm).then(() => {
+    //     //     this.$store.commit('user/SET_NAME', this.loginForm.username);
+    //     //     this.$router.push({ path: this.redirect || '/' })
+    //     //   })
+    //     // }).catch(error => {
+    //     //   console.error('请求出错:', error);
+    //     //   // 处理错误逻辑
+    //     // });
+    //       .then(({data}) => {
+    //         if (data.success)
+    //           success(data.message, data.status)
+    //         else
+    //           failure(data.message, data.status)
+    //       }).catch(error)
+    //   }
+    // }
   }
 };
 </script>

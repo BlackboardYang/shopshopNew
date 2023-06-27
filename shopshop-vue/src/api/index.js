@@ -1,11 +1,11 @@
 import axios from "axios";
 import {ElMessage} from "element-plus";
-import { useUserStore } from '@/stores/userStore'
+import {useUserStore} from '@/stores/userStore'
 
 const defaultError = () => ElMessage.error('I have a bad feeling about this...')
 const defaultFailure = (message) => ElMessage.warning(message)
 
-function post(url, data, success, failure = defaultFailure, error = defaultError){
+function post(url, data, success, failure = defaultFailure, error = defaultError) {
     axios.post(url, data, {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -19,7 +19,7 @@ function post(url, data, success, failure = defaultFailure, error = defaultError
     }).catch(error)
 }
 
-function get(url, success, failure = defaultFailure, error = defaultError){
+function get(url, success, failure = defaultFailure, error = defaultError) {
     axios.get(url, {
         withCredentials: true
     }).then(({data}) => {
@@ -62,4 +62,4 @@ httpInstance.interceptors.response.use(res => res.data, e => {
 
 export default httpInstance
 
-export{ get, post }
+export {get, post}

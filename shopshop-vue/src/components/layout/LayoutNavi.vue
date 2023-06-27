@@ -3,8 +3,12 @@
 import router from "@/router";
 import {get} from "@/api";
 import {ElMessage} from "element-plus";
+import {useUserStore} from "@/stores/userStore";
 
-const logout = () => {
+const userStore = useUserStore()
+
+const confirm = () => {
+  userStore.clearUserInfo();
   get('api/auth/logout', (message) => {
     ElMessage.success(message)
     router.push('/welcome/login')
@@ -16,21 +20,25 @@ const logout = () => {
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <template v-if="true">
-          <li><a href="javascript:"><i class="iconfont icon-user"></i>用户</a></li>
-          <li><a>
-            <el-button type="success" text="登录" link @click="router.push('../welcome/login')">登录</el-button>
-          </a></li>
-          <li><a>
-            <el-button type="danger" text="退出登录" link @click="logout()">退出登录</el-button>
-          </a></li>
-          <li><a href="javascript:;">我的订单</a></li>
-          <li><a href="javascript:;">会员中心</a></li>
+        <template v-if="userStore.userInfo.token">
+          <li><a href="javascript:"><i class="iconfont icon-user"></i>{{ userStore.userInfo.username }}</a></li>
+          <li><a href="javascript:">
+            <el-popconfirm @confirm=confirm>
+              <template #reference>
+                <el-button type="danger" text="Logout" link>Logout</el-button>
+              </template>
+            </el-popconfirm>
+          </a>
+          </li>
+          <li><a href="javascript:;">My Order</a></li>
+          <li><a href="javascript:;">My Space</a></li>
         </template>
         <template v-else>
-          <li><a href="javascript:;">请先登录</a></li>
-          <li><a href="javascript:;">帮助中心</a></li>
-          <li><a href="javascript:;">关于我们</a></li>
+          <li><a>
+            <el-button type="success" text="Login" link @click="router.push('../welcome/login')">Login</el-button>
+          </a></li>
+          <li><a href="javascript:;">Help Center</a></li>
+          <li><a href="javascript:;">About us</a></li>
         </template>
       </ul>
     </div>
