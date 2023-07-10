@@ -32,7 +32,7 @@ function get(url, success, failure = defaultFailure, error = defaultError) {
 
 // axios基础的封装
 const httpInstance = axios.create({
-    baseURL: 'http://localhost:8081',
+    baseURL: 'http://localhost:8081/api',
     timeout: 5000
 })
 
