@@ -1,0 +1,1 @@
+import{X as r,A as o}from"./index-8f1a75b5.js";import{h as a}from"./user-f978bbeb.js";function s(){return a({url:"/home/category/cat-level"})}const y=r("category",()=>{const t=o([]);return{categoryList:t,getCategory:async()=>{const e=await s();t.value=e.data}}});export{y as u};

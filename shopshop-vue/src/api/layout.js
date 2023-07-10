@@ -2,7 +2,7 @@ import httpInstance from '@/api/index'
 
 export function getCategoryAPI () {
     return httpInstance({
-        url: 'api/home/category/cat-level'
+        url: '/home/category/cat-level'
     })
 }
 
