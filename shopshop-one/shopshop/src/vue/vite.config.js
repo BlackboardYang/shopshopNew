@@ -13,6 +13,19 @@ const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 // https://vitejs.dev/config/
+module.exports = {
+    // https://cli.vuejs.org/config/#devserver-proxy
+    devServer: {
+        port: 3000,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8081/api',
+                ws: true,
+                changeOrigin: true
+            }
+        }
+    }
+}
 export default defineConfig({
     server: {
         host: true,
