@@ -1,57 +1,54 @@
-import { fileURLToPath, URL } from 'node:url'
+const { fileURLToPath, URL } = require('node:url');
+const { defineConfig } = require('vite');
+const vue = require('@vitejs/plugin-vue');
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+const AutoImport = require('unplugin-auto-import/vite');
+const Components = require('unplugin-vue-components/vite');
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+const { useDark, useToggle } = require('@vueuse/core');
 
-import { useDark, useToggle } from '@vueuse/core'
+const isDark = useDark();
+const toggleDark = useToggle(isDark);
 
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
-
-// https://vitejs.dev/config/
-module.exports = {
-    // https://cli.vuejs.org/config/#devserver-proxy
-    devServer: {
-        port: 3000,
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8081/api',
-                ws: true,
-                changeOrigin: true
-            }
-        }
-    }
-}
-export default defineConfig({
+module.exports = defineConfig({
     server: {
         host: true,
         port: 80,
     },
-  plugins: [vue(),
-  AutoImport({
-               resolvers: [ElementPlusResolver()],
-             }),
-  Components({
-               resolvers: [ElementPlusResolver({importStyle: "sass"})],
-             }),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
+    plugins: [
+        vue(),
+        AutoImport({
+            resolvers: [ElementPlusResolver()],
+        }),
+        Components({
+            resolvers: [ElementPlusResolver({ importStyle: "sass" })],
+        }),
+    ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url)),
+        },
+    },
     css: {
         preprocessorOptions: {
             scss: {
                 additionalData: `
-                    @use "@/styles/element/index.scss" as *;
-                    @use "@/styles/var.scss" as *;
-                    `,
-            }
-        }
-    }
-})
+          @use "@/styles/element/index.scss" as *;
+          @use "@/styles/var.scss" as *;
+        `,
+            },
+        },
+    },
+    // https://cli.vuejs.org/config/#devserver-proxy
+    server: {
+        port: 3000,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:8081',
+                ws: true,
+                changeOrigin: true,
+            },
+        },
+    },
+});
