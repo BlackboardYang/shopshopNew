@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/shopshop-spring/shopshop/pom.xml" />
+        <option value="$PROJECT_DIR$/shopshop-one/shopshop/pom.xml" />
       </list>
     </option>
   </component>

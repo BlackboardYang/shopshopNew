@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.panacea.shopshop.mapper.CategoryMapper">
+    <resultMap id="CategoryResultMap" type="com.panacea.shopshop.model.Category">
+        <id property="id" column="id" />
+        <result property="parentId" column="parent_id" />
+        <result property="level" column="level" />
+        <result property="name" column="name" />
+        <collection property="children" columnPrefix="child_" ofType="com.panacea.shopshop.model.Category">
+            <id property="id" column="id" />
+            <result property="parentId" column="parent_id" />
+            <result property="level" column="level" />
+            <result property="name" column="name" />
+        </collection>
+        <collection property="products" columnPrefix="product_" ofType="com.panacea.shopshop.model.Product">
+            <id property="id" column="id" />
+            <result property="parentId" column="parent_id" />
+            <result property="price" column="price" />
+            <result property="name" column="name" />
+            <result property="description" column="description" />
+        </collection>
+    </resultMap>
+
+    <select id="listWithChildren" resultMap="CategoryResultMap">
+        SELECT
+            c1.id,
+            c1.parent_id,
+            c1.level,
+            c1.name,
+            c2.id AS child_id,
+            c2.parent_id AS child_parent_id,
+            c2.level AS child_level,
+            c2.name AS child_name,
+            p.id AS product_id,
+            p.parent_id AS product_parent_id,
+            p.price AS product_price,
+            p.description AS product_description,
+            p.name AS product_name
+        FROM
+            category c1
+                LEFT JOIN
+            category c2 ON c1.id = c2.parent_id
+                LEFT JOIN
+            product p ON c2.id = p.parent_id
+        WHERE
+            c1.parent_id = 0;
+    </select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="shopshop" targetRuntime="MyBatis3">
+	
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3306/shopshop"
+			driverClass="com.mysql.cj.jdbc.Driver"
+			password="root"
+			userId="root">
+<!-- 			<property name="nullCatalogMeansCurrent" value="true" /> -->
+		</jdbcConnection>
+		
+		<javaModelGenerator
+			targetPackage="com.panacea.shopshop.generator"
+			targetProject="shopshop/src/main/java" />
+			
+		<sqlMapGenerator
+			targetPackage="mapper"
+			targetProject="shopshop/src/main/resources" />
+			
+		<javaClientGenerator
+			targetPackage="com.panacea.shopshop.generator"
+			targetProject="shopshop/src/main/java" type="XMLMAPPER" />
+			
+		<table tableName="product">
+		</table>
+		
+	</context>
+</generatorConfiguration>
