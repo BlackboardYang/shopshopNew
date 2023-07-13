@@ -1,6 +1,7 @@
 import axios from "axios";
 import {ElMessage} from "element-plus";
 import {useUserStore} from '@/stores/userStore'
+import { serverIp } from "/vite.config.js";
 
 const defaultError = () => ElMessage.error('I have a bad feeling about this...')
 const defaultFailure = (message) => ElMessage.warning(message)
@@ -32,7 +33,7 @@ function get(url, success, failure = defaultFailure, error = defaultError) {
 
 // axios基础的封装
 const httpInstance = axios.create({
-    baseURL: 'http://localhost:8081/api',
+    baseURL: 'http://' + serverIp + ':8081/api',
     timeout: 5000
 })
 

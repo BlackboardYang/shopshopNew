@@ -12,12 +12,10 @@ import { useDark, useToggle } from '@vueuse/core'
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
+export const serverIp = '43.207.59.230';
+
 // https://vitejs.dev/config/
 export default defineConfig({
-    server: {
-        host: true,
-        port: 80,
-    },
   plugins: [vue(),
   AutoImport({
                resolvers: [ElementPlusResolver()],
